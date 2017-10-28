@@ -1,5 +1,6 @@
-# Move Rails Application onto Docker
-Docker Basics
+# Dockerise Rails Application
+This blog is helpful for people who don't know anything about docker and would like to understand basics of dockerise rails application.
+
 ## Pre-requisites
 1) Create new virtual machine or AWS EC2 server using ubuntu 16 [Any fresh image you prefer]
 2) Now install the prerequisites needed for running rails server like rvm, ruby version, bundler and postgres etc 
@@ -50,10 +51,13 @@ development:
 ## Configuration
 1) Install latest docker from https://www.docker.com
 2) Run below command to confirm docker is working fine,
+```
    sudo docker -v
    Result: Docker version 17.10.0-ce, build f4ffd25 [You might have newer version]
+```   
 3) Now, go to root folder of your codebase you cloned earlier
-4) Create new file with name as 'Dockerfile' [This is the file where you will copy all the commands you executed for configuring your application as per pre-reauisites steps]
+4) Create new file with name as 'Dockerfile' 
+[This is the file where you will copy all the commands you executed for configuring your application as per pre-reauisites steps]
 ######### Here is a sample Dockerfile for Rails application using postgres server ##########
 ```
    FROM ubuntu:16.04
@@ -73,7 +77,7 @@ development:
    ADD . /codebase
    WORKDIR /codebase
    * You can provide the RAILS_ENV name for below rails commands,
-   RUN /bin/bash -l -c "bundle install --without development test"
+   RUN /bin/bash -l -c "bundle install"
    RUN /bin/bash -l -c "rake assets:precompile --trace"
    
    RUN apt-get install --yes --no-install-recommends supervisor
@@ -81,6 +85,41 @@ development:
    ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
    ENTRYPOINT ["/bin/bash", "-c", "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf -n"]
 ```
+
+5) Quickly create one free account or use your existing account on docker hub https://hub.docker.com/
+6) Create a repository in your docker hub account.
+7) Now you are all set to built an image from Dockerhub, run this command,
+   ```
+   sudo docker build -t <username_on_dockerhub/repo_name_on_dockerhub:V0>
+   ```
+8) Once image gets built successfully, we have to run the container 
+   ```
+   docker run -i -t <username_on_dockerhub/repo_name_on_dockerhub:V0>
+   ```
+9) Confirm the container is running 
+   ```
+   sudo docker ps
+   ```
+10)Now we need the IP of the container to confirm application is running on it.
+   Get the IP of the running container   
+   ```
+      sudo docker inspect <container_id> # Getcontainer_id from docker ps command
+   ```
+   You will see the IP being listed at the end of the command in the jason format.
+   
+11) Run below command to confirm app is running,
+   ```
+      curl http://<ip_of_container>:3000
+   ```
+
+That's it, you have successfully dockerised your rails application.
+
+
+
+   
+   
+   
+   
 
 
 
