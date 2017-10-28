@@ -103,13 +103,13 @@ development:
 10)Now we need the IP of the container to confirm application is running on it.
    Get the IP of the running container   
 ```
-      sudo docker inspect <container_id> # Getcontainer_id from docker ps command
+   sudo docker inspect <container_id> # Getcontainer_id from docker ps command
 ```
    You will see the IP being listed at the end of the command in the jason format.
    
 11) Run below command to confirm app is running,
 ```
-      curl http://<ip_of_container>:3000
+   curl http://<ip_of_container>:3000
 ```
 
 That's it, you have successfully dockerised your rails application.
