@@ -1,5 +1,5 @@
 # Dockerise Rails Application
-This blog is helpful for people who don't know anything about docker and would like to understand basics of dockerise rails application.
+This blog is helpful for people who don't know anything about docker and would like to understand basics to dockerise rails application.
 
 ## Pre-requisites
 1) Create new virtual machine or AWS EC2 server using ubuntu 16 [Any fresh image you prefer]
