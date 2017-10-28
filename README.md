@@ -89,40 +89,27 @@ development:
 5) Quickly create one free account or use your existing account on docker hub https://hub.docker.com/
 6) Create a repository in your docker hub account.
 7) Now you are all set to built an image from Dockerhub, run this command,
-   ```
+```
    sudo docker build -t <username_on_dockerhub/repo_name_on_dockerhub:V0>
-   ```
+```
 8) Once image gets built successfully, we have to run the container 
-   ```
+```
    docker run -i -t <username_on_dockerhub/repo_name_on_dockerhub:V0>
-   ```
+```
 9) Confirm the container is running 
-   ```
+```
    sudo docker ps
-   ```
+```
 10)Now we need the IP of the container to confirm application is running on it.
    Get the IP of the running container   
-   ```
+```
       sudo docker inspect <container_id> # Getcontainer_id from docker ps command
-   ```
+```
    You will see the IP being listed at the end of the command in the jason format.
    
 11) Run below command to confirm app is running,
-   ```
+```
       curl http://<ip_of_container>:3000
-   ```
+```
 
 That's it, you have successfully dockerised your rails application.
-
-
-
-   
-   
-   
-   
-
-
-
-   
-   
-
